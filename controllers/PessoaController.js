@@ -9,7 +9,8 @@ controller.getAll = async (req, res) => {
         const pessoas = await Pessoa.findAll({
             include: Endereco
         })
-        res.status(200).json(pessoas)
+        // res.status(200).json(pessoas)
+        res.status(200).render("pessoas/index")
     }catch(error){
         res.status(500).json(error)
     }
@@ -36,13 +37,15 @@ controller.getById = async (req, res) => {
 
 //falta implementar front-end
 controller.create = async (req, res) => {
-    const {nome} = req.body
-    const {rua,cidade} = req.body.endereco
+    //const {nome} = req.body
+    //const {rua,cidade} = req.body.endereco
+    const {nome, rua, cidade} = req.body
 
     try{
         const pessoa = await Pessoa.create({nome})
         await Endereco.create({rua,cidade,pessoaId:pessoa.id})
-        res.status(200).json(pessoa)
+        //res.status(200).json(pessoa)
+        res.status(200).render("pessoas/index")
     }catch(error){ 
         res.status(422).send("Ocorreu um erro ao cadastrar a pessoa. " + error)
     }
@@ -95,4 +98,7 @@ controller.delete = async (req, res) => {
     }
 }
 
+controller.getRegisterPage = async (req, res) => {
+    res.status(200).render("pessoas/form")
+}
 module.exports = controller
