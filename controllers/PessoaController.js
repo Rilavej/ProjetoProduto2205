@@ -10,7 +10,7 @@ controller.getAll = async (req, res) => {
             include: Endereco
         })
         // res.status(200).json(pessoas)
-        res.status(200).render("pessoas/index")
+        res.status(200).render("pessoas/index", {pessoas})
     }catch(error){
         res.status(500).json(error)
     }
@@ -50,8 +50,6 @@ controller.create = async (req, res) => {
         res.status(422).send("Ocorreu um erro ao cadastrar a pessoa. " + error)
     }
 }
-
-//falta implementar front-end
 controller.update = async (req, res) => {
     const {pessoaId} = req.params
     const {nome} = req.body
@@ -85,6 +83,40 @@ controller.update = async (req, res) => {
         res.status(422).send("Ocorreu um erro ao atualizar a pessoa. " + error)
     }
 }
+//versão API
+/* controller.update = async (req, res) => {
+    const {pessoaId} = req.params
+    const {nome} = req.body
+    const {rua,cidade} = req.body.endereco
+    try{
+        const pessoa = await Pessoa.findByPk(pessoaId)
+
+        if (!pessoa){
+            res.status(422).send("Pessoa não existe!")
+        }
+
+        pessoa.nome = nome
+        await pessoa.save()
+
+        const endereco = await Endereco.findOne({
+            where:{
+                pessoaId : pessoaId
+            }
+        })
+
+        if (!endereco){
+            res.status(422).send("Endereço não existe!")
+        }
+
+        endereco.rua = rua
+        endereco.cidade = cidade
+        await endereco.save()
+
+        res.status(200).json(pessoa)
+    }catch (error){
+        res.status(422).send("Ocorreu um erro ao atualizar a pessoa. " + error)
+    }
+} */
 
 //falta implementar front-end
 controller.delete = async (req, res) => {

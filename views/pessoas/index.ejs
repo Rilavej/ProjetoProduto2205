@@ -2,9 +2,47 @@
 
 <%- include("../layouts/menu") %>
 
+<section class="section">
+  <div class="container">
+    <div class="columns">
+      <div class="column is-four-fifths">
+        <h1 class="title is-4">Pessoas</h1>
+      </div>
+      <div class="column is-one-fifth">
+        <div class="buttons is-pulled-right">
+          <a href="/pessoas/novo" class="button is-success is-small">Cadastrar pessoa</a>
+          <a href="/" class="button is-small">Voltar</a>
+        </div>
+      </div>
+    </div>
 
+    <hr />
+
+      <% pessoas.forEach(pessoa => { %>
+      <div class="columns">
+        <div class="column">
+          <div class="card card--product">
+            <div class="card-content">
+              <div class="media">
+                <div class="media-content">
+                    <p class="title is-6"><%= pessoa.nome %></p>
+                    <p class="subtitle is-7">Endereço: <%= "Rua " + pessoa.endereco.rua + ", " + pessoa.endereco.cidade %></p>
+                  </div>
+                <div class="media-right">
+                  <div class="buttons">
+                    <a href="/pessoas/<%= pessoa.id %>/update" class="button is-warning is-small">Atualizar</a>
+                    <a href="/pessoas/<%= pessoa.id %>?_method=delete" class="button is-danger is-small">Remover</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <% }) %>    
   
-
+  </div>
+</section>
 
        
   
