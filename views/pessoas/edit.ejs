@@ -1,4 +1,4 @@
-<%- include("../layouts/header", {title: 'Cadastro de Pessoas'}) %>
+<%- include("../layouts/header", {title: 'Atualização de Pessoa'}) %>
 
 <%- include("../layouts/menu") %>
 
@@ -6,7 +6,7 @@
     <div class="container">
         <div class="columns">
             <div class="column is-four-fifths">
-              <h1 class="title is-4">Cadastro de Pessoas</h1>
+              <h1 class="title is-4">Atualização de Pessoa</h1>
             </div>
             <div class="column is-one-fifth">
               <div class="buttons is-pulled-right">
@@ -14,31 +14,34 @@
               </div>
             </div>
           </div>
-      
-      <form action="/pessoas" method="POST">
+      <% if (pessoa.error) { %>
+        <p class="is-danger help"><%= pessoa.error %></p>
+      <% } %>
+      <form action="/pessoas/<%= pessoa.id %>?_method=put" method="POST">
         <div class="field">
           <label class="label">Nome</label>
           <div class="control">
-            <input class="input" type="text" name="nome" placeholder="Digite o nome da pessoa" required>
+            <input class="input" type="text" name="nome" value="<%= pessoa.nome %>" required>
           </div>
         </div>
   
         <div class="field">
-          <label class="label">Endereço</label>
+          <label class="label">Rua</label>
           <div class="control">
-            <input class="input" type="text" name="endereco.rua" placeholder="logradouro" required>
+            <input class="input" type="text" name="rua" value="<%= pessoa.endereco.rua %>" required>
+          </div>
+        </div>
+  
+        <div class="field">
+          <label class="label">Cidade</label>
+          <div class="control">
+            <input class="input" type="text" name="cidade" value="<%= pessoa.endereco.cidade %>" required>
           </div>
         </div>
   
         <div class="field">
           <div class="control">
-            <input class="input" type="text" name="endereco.cidade" placeholder="cidade" required>
-          </div>
-        </div>
-  
-        <div class="field">
-          <div class="control">
-            <button type="submit" class="button is-success">Cadastrar</button>
+            <button type="submit" class="button is-success">Atualizar</button>
           </div>
         </div>
       </form>
