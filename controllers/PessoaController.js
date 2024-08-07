@@ -104,4 +104,25 @@ controller.delete = async (req, res) => {
 controller.getRegisterPage = async (req, res) => {
     res.status(200).render("pessoas/form")
 }
+
+controller.getUpdatePage = async (req, res) => {
+    const {pessoaId} = req.params
+    try {
+        const pessoa = await Pessoa.findByPk(pessoaId, {
+            include: Endereco
+        })
+
+        if (!pessoa) {
+            return res.status(422).render("pages/error",{error: "Pessoa não existe!"})
+        }
+        console.log(pessoa)
+        // const cores = await Cor.findAll()
+        res.status(200).render("pessoas/edit",{ pessoa
+        //     cores : cores,
+        //     pessoa : pessoa
+        })
+    } catch (error) {
+        res.status(500).render("pages/error",{error: "Erro ao carregar o formulário!"})
+    }
+}
 module.exports = controller
