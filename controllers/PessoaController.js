@@ -3,7 +3,6 @@ const Endereco = require("../models/endereco")
 
 const controller = {}
 
-//falta implementar front-end
 controller.getAll = async (req, res) => {
     try{
         const pessoas = await Pessoa.findAll({
@@ -11,12 +10,12 @@ controller.getAll = async (req, res) => {
         })
         // res.status(200).json(pessoas)
         res.status(200).render("pessoas/index", {pessoas})
+        console.log(pessoas)
     }catch(error){
         res.status(500).json(error)
     }
 }
 
-//falta implementar front-end
 controller.getById = async (req, res) => {
     const {pessoaId} = req.params
 
@@ -29,23 +28,27 @@ controller.getById = async (req, res) => {
             res.status(422).send("Pessoa não existe!")
         }
 
-        res.status(200).json(pessoa)
+        // res.status(200).json(pessoa)
+        const pessoas = [pessoa]
+        res.status(200).render("pessoas/index", {pessoas})
+        console.log(pessoas)
     }catch(error){ 
         res.status(422).json("Ocorreu um erro ao buscar o item. " + error)
     }
 }
 
-//falta implementar front-end
 controller.create = async (req, res) => {
     //const {nome} = req.body
     //const {rua,cidade} = req.body.endereco
     const {nome, rua, cidade} = req.body
-
+    console.log(rua)
+    console.log(cidade)
+    
     try{
         const pessoa = await Pessoa.create({nome})
-        await Endereco.create({rua,cidade,pessoaId:pessoa.id})
+        await Endereco.create({rua, cidade, pessoaId:pessoa.id})
         //res.status(200).json(pessoa)
-        res.status(200).render("pessoas/index")
+        res.status(200).redirect("/pessoas")
     }catch(error){ 
         res.status(422).send("Ocorreu um erro ao cadastrar a pessoa. " + error)
     }
