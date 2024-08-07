@@ -29,6 +29,8 @@ routes.put("/pedidos/:pessoaId/:pedidoId",PedidoController.update)
 routes.delete("/pedidos/:pessoaId/:pedidoId",PedidoController.delete)
 
 routes.get("/pessoas/novo",PessoaController.getRegisterPage)
+// routes.get("/pessoas/:pessoaId/update",PessoaController.getUpdatePage)
+
 
 routes.get("/pessoas",PessoaController.getAll)
 routes.get("/pessoas/:pessoaId",PessoaController.getById)

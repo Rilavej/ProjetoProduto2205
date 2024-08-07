@@ -29,7 +29,8 @@ controller.getById = async (req, res) => {
             res.status(422).send("Pessoa não existe!")
         }
 
-        res.status(200).json(pessoa)
+        res.status(200).render("pessoas/byId", {pessoa})
+        console.log(pessoa)
     }catch(error){ 
         res.status(422).json("Ocorreu um erro ao buscar o item. " + error)
     }
