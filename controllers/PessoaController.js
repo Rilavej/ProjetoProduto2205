@@ -41,6 +41,7 @@ controller.create = async (req, res) => {
     //const {nome} = req.body
     //const {rua,cidade} = req.body.endereco
     const {nome, rua, cidade} = req.body
+    console.log(nome)
     console.log(rua)
     console.log(cidade)
     
@@ -53,6 +54,7 @@ controller.create = async (req, res) => {
         res.status(422).send("Ocorreu um erro ao cadastrar a pessoa. " + error)
     }
 }
+
 controller.update = async (req, res) => {
     const {pessoaId} = req.params
     // const {nome} = req.body
@@ -89,13 +91,13 @@ controller.update = async (req, res) => {
     }
 }
 
-//falta implementar front-end
 controller.delete = async (req, res) => {
     const {pessoaId} = req.params
     try{
         const pessoa = await Pessoa.findByPk(pessoaId)
         await pessoa.destroy()
-        res.status(200).json(pessoa)
+        // res.status(200).json(pessoa)
+        res.status(200).redirect("/pessoas")
     }catch (error){
         res.status(422).send("Ocorreu um erro ao remover a pessoa. " + error)
     }
