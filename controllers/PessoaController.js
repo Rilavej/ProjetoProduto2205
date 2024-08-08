@@ -113,7 +113,11 @@ controller.delete = async (req, res) => {
 }
 
 controller.getRegisterPage = async (req, res) => {
-    res.status(200).render("pessoas/form")
+    try {
+        res.status(200).render("pessoas/form")
+    } catch {
+        res.status(500).render("pages/error",{error: "Erro ao carregar o formulário!"})
+    }
 }
 
 controller.getUpdatePage = async (req, res) => {
