@@ -12,7 +12,7 @@ controller.getAll = async (req, res) => {
         res.status(200).render("pessoas/index", {pessoas})
         console.log(pessoas)
     }catch(error){
-        res.status(500).json(error)
+        res.status(500).render("pages/error", {error})
     }
 }
 
@@ -25,7 +25,10 @@ controller.getById = async (req, res) => {
         })
         
         if (!pessoa){
-            res.status(422).send("Pessoa não existe!")
+            // res.status(422).send("Pessoa não existe!")
+            const error = "Pessoa não existe!"
+            throw error
+            // res.status(422).render("pages/error", {error})
         }
 
         // res.status(200).json(pessoa)
@@ -33,7 +36,8 @@ controller.getById = async (req, res) => {
         res.status(200).render("pessoas/index", {pessoas})
         console.log(pessoas)
     }catch(error){ 
-        res.status(422).json("Ocorreu um erro ao buscar o item. " + error)
+        // res.status(422).json("Ocorreu um erro ao buscar o item. " + error)
+        res.status(422).render("pages/error", {error})
     }
 }
 
