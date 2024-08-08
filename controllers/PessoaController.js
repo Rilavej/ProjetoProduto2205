@@ -57,8 +57,9 @@ controller.create = async (req, res) => {
 //versão API
 controller.update = async (req, res) => {
     const {pessoaId} = req.params
-    const {nome} = req.body
-    const {rua,cidade} = req.body.endereco
+    // const {nome} = req.body
+    // const {rua,cidade} = req.body.endereco
+    const {nome, rua, cidade} = req.body
     try{
         const pessoa = await Pessoa.findByPk(pessoaId)
 
@@ -83,7 +84,9 @@ controller.update = async (req, res) => {
         endereco.cidade = cidade
         await endereco.save()
 
-        res.status(200).json(pessoa)
+        const id = pessoa.id
+        res.status(200).redirect(`/pessoas/${id}`)
+        // res.status(200).render("pessoas/byId", {pessoa})
     }catch (error){
         res.status(422).send("Ocorreu um erro ao atualizar a pessoa. " + error)
     }
@@ -95,7 +98,8 @@ controller.delete = async (req, res) => {
     try{
         const pessoa = await Pessoa.findByPk(pessoaId)
         await pessoa.destroy()
-        res.status(200).json(pessoa)
+        // res.status(200).json(pessoa)
+        res.status(200).redirect("/pessoas")
     }catch (error){
         res.status(422).send("Ocorreu um erro ao remover a pessoa. " + error)
     }
