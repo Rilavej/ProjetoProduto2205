@@ -85,7 +85,7 @@ controller.update = async (req, res) => {
         await endereco.save()
 
         // res.status(200).json(pessoa)
-        res.status(200).redirect("/pessoas")
+        res.status(200).redirect(`/pessoas/${pessoa.id}`)
     }catch (error){
         res.status(422).send("Ocorreu um erro ao atualizar a pessoa. " + error)
     }
