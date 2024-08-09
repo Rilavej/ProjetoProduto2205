@@ -30,12 +30,14 @@ routes.delete("/pedidos/:pessoaId/:pedidoId",PedidoController.delete)
 
 routes.get("/pessoas/novo",PessoaController.getRegisterPage)
 routes.get("/pessoas/:pessoaId/update",PessoaController.getUpdatePage)
+routes.post("/pessoas/filter", PessoaController.filterById)
 
 routes.get("/pessoas",PessoaController.getAll)
 routes.get("/pessoas/:pessoaId",PessoaController.getById)
 routes.post("/pessoas",PessoaController.create)
 routes.put("/pessoas/:pessoaId",PessoaController.update)
 routes.delete("/pessoas/:pessoaId",PessoaController.delete)
+
 
 
 

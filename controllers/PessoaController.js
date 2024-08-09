@@ -137,4 +137,14 @@ controller.getUpdatePage = async (req, res) => {
         res.status(500).render("pages/error",{error: "Erro ao carregar o formulário!"})
     }
 }
+
+controller.filterById = async (req, res) => {
+    try {
+        const {id} = req.body
+        res.status(200).redirect(`/pessoas/${id}`)
+    } catch {
+        res.status(422).render("pages/error", {error})
+    }
+}
+
 module.exports = controller
