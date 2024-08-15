@@ -1,5 +1,8 @@
 const Pessoa = require("../models/pessoa")
 const Endereco = require("../models/endereco")
+const bcrypt = require("bcrypt") 
+const SALT_ROUNDS = 10
+
 
 const controller = {}
 
@@ -42,13 +45,14 @@ controller.getById = async (req, res) => {
 controller.create = async (req, res) => {
     //const {nome} = req.body
     //const {rua,cidade} = req.body.endereco
-    const {nome, rua, cidade} = req.body
+    const {nome, rua, cidade, username, password} = req.body
         
     try{
-        const pessoa = await Pessoa.create({nome})
+        const passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
+        const pessoa = await Pessoa.create({nome:nome, username:username, passwordHash:passwordHash})
         await Endereco.create({rua, cidade, pessoaId:pessoa.id})
         //res.status(200).json(pessoa)
-        res.status(200).redirect("/pessoas")
+        res.status(200).redirect("/")
     }catch(error){ 
         // res.status(422).send("Ocorreu um erro ao cadastrar a pessoa. " + error)
         res.status(422).render("pages/error", {error})
@@ -60,7 +64,7 @@ controller.update = async (req, res) => {
     const {pessoaId} = req.params
     // const {nome} = req.body
     // const {rua,cidade} = req.body.endereco
-    const {nome,rua,cidade} = req.body
+    const {nome,rua,cidade,username,password} = req.body
     try{
         const pessoa = await Pessoa.findByPk(pessoaId)
 
@@ -71,6 +75,8 @@ controller.update = async (req, res) => {
         }
 
         pessoa.nome = nome
+        pessoa.username = username
+        pessoa.password = await bcrypt.hash(password, SALT_ROUNDS)
         await pessoa.save()
 
         const endereco = await Endereco.findOne({
@@ -115,7 +121,7 @@ controller.delete = async (req, res) => {
 controller.getRegisterPage = async (req, res) => {
     try {
         res.status(200).render("pessoas/form")
-    } catch {
+    } catch (error){
         res.status(500).render("pages/error",{error: "Erro ao carregar o formulário!"})
     }
 }
@@ -142,9 +148,38 @@ controller.filterById = async (req, res) => {
     try {
         const {id} = req.body
         res.status(200).redirect(`/pessoas/${id}`)
-    } catch {
+    } catch (error){
         res.status(422).render("pages/error", {error})
     }
 }
 
+controller.getLoginPage = async (req, res) => {
+    try {
+        const url = req.originalUrl
+        console.log(url)
+        res.status(200).render("pages/login", {url})
+    } catch (error){
+        res.status(422).render("pages/error", {error})
+    }
+}
+controller.auth = async (req, res) => {
+    try {
+        const url = req.originalUrl
+        console.log(url)
+        const {username, password} = req.body
+        const pessoa = await Pessoa.findOne({where: {username: username}})
+        const validation = await bcrypt.compare(password, pessoa.passwordHash)
+        console.log(validation)
+        if (validation) {
+            res.render("pages/index", {username: username})
+            // res.send(`OK password: ${password}, passwordHash: ${pessoa.passwordHash}`)        
+        }
+        else {
+            throw "Usuário ou Senha incorreto!"
+        }
+
+    } catch (error){
+        res.render("pages/error", {error})
+    }
+}
 module.exports = controller

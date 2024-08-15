@@ -1,6 +1,6 @@
 <%- include("../layouts/header", {title: 'Cadastro de Pessoa'}) %>
 
-<%- include("../layouts/menu") %>
+<%- include("../layouts/menu", {username: ""}) %>
 
 <section class="section">
     <div class="container">
@@ -15,7 +15,7 @@
             </div>
           </div>
       
-      <form action="/pessoas" method="POST">
+      <form action="/cadastrar" method="POST">
         <div class="field">
           <label class="label">Nome</label>
           <div class="control">
@@ -24,15 +24,30 @@
         </div>
   
         <div class="field">
-          <label class="label">Endereço</label>
+          <label class="label">Logradouro</label>
           <div class="control">
             <input class="input" type="text" name="rua" placeholder="logradouro" required>
           </div>
         </div>
   
         <div class="field">
+          <label class="label">Cidade</label>
           <div class="control">
             <input class="input" type="text" name="cidade" placeholder="cidade" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Nome de usuario</label>
+          <div class="control">
+            <input class="input" type="text" name="username" placeholder="Digite o nome de usuario" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input class="input" type="password" name="password" placeholder="Digite a senha" required>
           </div>
         </div>
   

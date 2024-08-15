@@ -12,10 +12,21 @@
       <a class="navbar-item" href="/pessoas/">
         Pessoas
       </a>
-      <div class="navbar-burger burger" data-target="navMenuColorblack-example">
-        <span></span>
-        <span></span>
-        <span></span>
-      </div>
+    </div>
+    <div class="navbar-brand" style="margin-left: auto;">
+      <a class="navbar-item" href="/cadastrar" style="margin-left: auto;">
+        Cadastrar usuários
+      </a>
+      <% if (username) { %>
+      <a class="navbar-item" href="/pessoas/login" style="margin-left: auto;">
+        <%= username %>
+      </a>
+      <% } %>
+    </div>
+    
+    <div class="navbar-burger burger" data-target="navMenuColorblack-example">
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
   </nav>

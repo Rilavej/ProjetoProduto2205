@@ -15,6 +15,7 @@
     "nodemon": "^2.0.22"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "bulma": "^0.9.4",
     "bulma-extensions": "^6.2.7",
     "ejs": "^3.1.9",

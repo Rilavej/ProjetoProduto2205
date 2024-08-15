@@ -1,6 +1,6 @@
 <%- include("../layouts/header", {title: 'Atualização de Pessoa'}) %>
 
-<%- include("../layouts/menu") %>
+<%- include("../layouts/menu", {username: ""}) %>
 
 <section class="section">
     <div class="container">
@@ -26,7 +26,7 @@
         </div>
   
         <div class="field">
-          <label class="label">Rua</label>
+          <label class="label">Logradouro</label>
           <div class="control">
             <input class="input" type="text" name="rua" value="<%= pessoa.endereco.rua %>" required>
           </div>
@@ -38,7 +38,21 @@
             <input class="input" type="text" name="cidade" value="<%= pessoa.endereco.cidade %>" required>
           </div>
         </div>
-  
+        
+        <div class="field">
+          <label class="label">Nome de usuario</label>
+          <div class="control">
+            <input class="input" type="text" name="username" value="<%= pessoa.username %>" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input class="input" type="password" name="password" value="<%= pessoa.password %>" >
+          </div>
+        </div>
+
         <div class="field">
           <div class="control">
             <button type="submit" class="button is-success">Atualizar</button>

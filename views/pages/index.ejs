@@ -1,6 +1,6 @@
  <%- include("../layouts/header", {title: 'Lista de Pedidos'}) %>
-
- <%- include("../layouts/menu") %>
+ 
+ <%- include("../layouts/menu", {username: username}) %>
 
  <section class="section hero is-primary is-fullheight-with-navbar">
     <div class="hero-body">
@@ -16,7 +16,7 @@
             <div class="box custom-box-bg">
               <h3 class="title is-size-3 ">Pedidos</h3>
               <p class="subtitle is-size-5 ">Visualize e gerencie seus pedidos.</p>
-              <a href="/pedidos/<%= pessoaId %>" class="button is-link is-medium">Ver Pedidos</a>
+              <a href="/pedidos/" class="button is-link is-medium">Ver Pedidos</a>
             </div>
           </div>
           <div class="column is-half">

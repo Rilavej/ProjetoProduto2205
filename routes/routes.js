@@ -7,7 +7,7 @@ const PedidoController = require("../controllers/PedidoController")
 const routes = express.Router()
 
 routes.get("/",(req,res)=>{
-    res.status(200).render("pages/index",{
+    res.status(200).render("pages/login", {
         pessoaId:1
     })
 })
@@ -28,15 +28,22 @@ routes.post("/pedidos/:pessoaId",PedidoController.create)
 routes.put("/pedidos/:pessoaId/:pedidoId",PedidoController.update)
 routes.delete("/pedidos/:pessoaId/:pedidoId",PedidoController.delete)
 
+routes.get("/pessoas/login", PessoaController.getLoginPage)
+routes.post("/auth", PessoaController.auth)
+
+routes.get("/cadastrar",PessoaController.getRegisterPage)
 routes.get("/pessoas/novo",PessoaController.getRegisterPage)
 routes.get("/pessoas/:pessoaId/update",PessoaController.getUpdatePage)
+
 routes.post("/pessoas/filter", PessoaController.filterById)
 
 routes.get("/pessoas",PessoaController.getAll)
 routes.get("/pessoas/:pessoaId",PessoaController.getById)
-routes.post("/pessoas",PessoaController.create)
+routes.post("/cadastrar",PessoaController.create)
+routes.post("/pessoas/novo",PessoaController.create)
 routes.put("/pessoas/:pessoaId",PessoaController.update)
 routes.delete("/pessoas/:pessoaId",PessoaController.delete)
+
 
 
 
