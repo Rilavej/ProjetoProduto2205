@@ -15,10 +15,10 @@ controller.getAll = async (req, res) => {
           })
           const pessoa = pedidos[0].pessoa
         //res.status(200).json(pedidos)
-        res.status(200).render("pedidos/index",{
+        res.status(200).render("pedidos/index" /*,{
             pedidos : pedidos,
-            pessoa : pessoa
-        })
+            pessoa : pessoa 
+        }*/)
     }catch(error){
         //res.status(500).json(error)
         res.status(500).render("pages/error",{error : "Erro ao exibir os pedidos"})

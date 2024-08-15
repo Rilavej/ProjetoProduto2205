@@ -1,42 +1,55 @@
-<%- include("../layouts/header", {title: 'Cadastro de Usuários'}) %>
+<%- include("../layouts/header", {title: 'Cadastro de Usuários' }) %>
 
-<%- include("../layouts/menu", {username: ""}) %>
+<!-- <%- include("../layouts/menu", {username: ""}) %> -->
+<nav class="navbar is-black">
+  <div class="navbar-brand" style="margin-left: auto;">
+    <div class="navbar-brand" style="margin-left: auto;">
+      <a class="navbar-item" href="/pessoas/novo" style="margin-left: auto;">
+        Cadastrar usuário
+      </a>
+    </div>
+  </div>
+</nav>
 
 <section class="section hero is-primary is-fullheight-with-navbar">
-<div class="container">
-  <div class="box custom-box-bg">
-    <div class="container has-text-centered">
+  <div class="container">
+    <div class="box custom-box-bg has-background-info		">
       <div class="container has-text-centered">
-        <h1 class="title is-size-1">Login</h1>
-      </div>
-      <div class="column is-one-fifth">
-        <div class="buttons is-pulled-right">
-          <!-- <a href="/" class="button is-small">Voltar</a> -->
-        </div>
-      </div>
-    </div>
-    <form action="/auth" method="POST">
-      <div class="field">
-        <label class="label">Nome de Usuário</label>
-        <div class="control">
-          <input class="input" type="text" name="username" placeholder="Digite seu nome de usuário" required>
-        </div>
-      </div>
-      <div class="field">
-        <label class="label">Senha</label>
-        <div class="control">
-          <input class="input" type="password" name="password" placeholder="Digite sua senha" required>
-        </div>
-      </div>
-      <div class="field">
         <div class="container has-text-centered">
-          <button type="submit" class="button is-success">Entrar</button>
+          <h1 class="title is-size-1">Login</h1>
+        </div>
+        <div class="column is-one-fifth">
+          <!-- <div class="buttons is-pulled-right"> -->
+            <!-- <a href="/" class="button is-small">Voltar</a> -->
+          <!-- </div> -->
         </div>
       </div>
-    </form>
+      <form action="/inicio" method="POST">
+        <div class="field">
+          <label class="label">Nome de Usuário</label>
+          <div class="control">
+            <input class="input" type="text" name="username" placeholder="Digite seu nome de usuário" required>
+          </div>
+        </div>
+        <div class="field">
+          <label class="label">Senha</label>
+          <div class="control">
+            <input class="input" type="password" name="password" placeholder="Digite sua senha" required>
+          </div>
+        </div>
+        <div class="column is-one-fifth">
+        </div>
+        <div class="field">
+          <div class="container has-text-centered">
+            <div class="control">
+              <button type="submit" class="button is-success">Entrar</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </section>
 
-  
-  <%- include("../layouts/footer") %>
+
+<%- include("../layouts/footer") %>

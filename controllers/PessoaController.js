@@ -76,7 +76,7 @@ controller.update = async (req, res) => {
 
         pessoa.nome = nome
         pessoa.username = username
-        pessoa.password = await bcrypt.hash(password, SALT_ROUNDS)
+        pessoa.passwordHash = await bcrypt.hash(password, SALT_ROUNDS)
         await pessoa.save()
 
         const endereco = await Endereco.findOne({
@@ -157,7 +157,7 @@ controller.getLoginPage = async (req, res) => {
     try {
         const url = req.originalUrl
         console.log(url)
-        res.status(200).render("pages/login", {url})
+        res.status(200).render("pages/login")
     } catch (error){
         res.status(422).render("pages/error", {error})
     }

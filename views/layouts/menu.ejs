@@ -1,27 +1,30 @@
 <nav class="navbar is-black">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" href="/inicio/<%= username %>">
         Início
       </a>
-      <a class="navbar-item" href="pedidos/1">
+      <a class="navbar-item" href="/pedidos/1">
         Pedidos
       </a>
       <a class="navbar-item" href="/produtos">
         Produtos
       </a>
-      <a class="navbar-item" href="/pessoas/">
+      <a class="navbar-item" href="/pessoas">
         Pessoas
       </a>
     </div>
     <div class="navbar-brand" style="margin-left: auto;">
-      <a class="navbar-item" href="/cadastrar" style="margin-left: auto;">
-        Cadastrar usuários
-      </a>
       <% if (username) { %>
-      <a class="navbar-item" href="/pessoas/login" style="margin-left: auto;">
+      <a class="navbar-item" href="/" style="margin-left: auto;">
         <%= username %>
       </a>
       <% } %>
+      <a class="navbar-item" href="/" style="margin-left: auto;">
+        Mudar usuário
+      </a>
+      <a class="navbar-item" href="/pessoas/novo" style="margin-left: auto;">
+        Cadastrar usuário
+      </a>
     </div>
     
     <div class="navbar-burger burger" data-target="navMenuColorblack-example">
